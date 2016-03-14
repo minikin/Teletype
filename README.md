@@ -28,6 +28,8 @@ Maecenas pretium id dui ullamcorper consectetur. Aliquam ut ligula magna. Sed co
 
 ### Parts List
 
+![Parts List](https://s3.eu-central-1.amazonaws.com/teletype/kit.png)
+
 * [Raspberry Pi Model B](https://www.raspberrypi.org/products/model-b-plus/)
 * [Mini Receipt Printer](https://www.adafruit.com/products/597)
 * [50 foot long receipt paper. BPA-free.](https://www.adafruit.com/products/599)
@@ -41,6 +43,8 @@ Maecenas pretium id dui ullamcorper consectetur. Aliquam ut ligula magna. Sed co
 * Enclosure + hardware
 
 ### Tools
+
+![Tools](https://s3.eu-central-1.amazonaws.com/teletype/tools.png)
 
 * SD (or microSD) card reader
 * USB keyboard
@@ -314,7 +318,38 @@ There's only a single function in the thermal printer library that even referenc
 ### Firebase Setup
 
 
-_in progress_
+**Create an account**
+
+The first thing you need to do to get started with Firebase [is sign up for a free account](https://www.firebase.com/login/). 
+A brand new Firebase app will automatically be created for you with its own unique database URL ending in firebaseio.com. 
+We'll use this database URL to store and sync data.
+
+
+**Go to a dashboard**
+
+**Upload [teletype.JSON]()**
+
+
+**Set security rules**
+
+Go to security tab and past this code:
+
+```
+
+```
+
+Then press save.
+
+
+
+
+**Install firebase cl**
+
+
+**Save & Retrieve Data**
+
+We can use any Firebase database URL as a REST endpoint by appending .json to the end of the URL, and sending standard HTTPS requests
+
 
 -----
 

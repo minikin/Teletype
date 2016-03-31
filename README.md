@@ -14,10 +14,11 @@
 4. Raspberry Pi Setup
 5. Configure network
 6. Soldering
-7. Firebase Setup 
-8. Teletype Setup
-9. Case Assembly
-10. Troubleshooting
+7. Teletype Setup
+8. Case Assembly
+9. Firebase Setup 
+10. Test Teletype
+11. Troubleshooting
 
 -----
 
@@ -313,43 +314,6 @@ The green wire is not connected.
 The green wire is only used for rare cases where the printer returns data to the computer. It’s left unconnected because the printer works at 5 Volts and the Raspberry Pi at 3.3 Volts…connecting directly to the RXD pin could permanently damage the Raspberry Pi! (The other direction is safe as-is.)
 There's only a single function in the thermal printer library that even references this (paper detect, and this isn’t used by any of our example code)…everything else moves from the computer to printer. As this is an esoteric feature, and with the risk of damage if wrongly connected, we chose to leave this unused. If (and only if) you think you might really need this feature, you can solder a 10K-Ohm resistor (not included) in-line between the GREEN wire and the RXD pin on the Cobbler. Cover this in heat-shrink tube to avoid contact with the board.
 
------
-
-### Firebase Setup
-
-
-**Create an account**
-
-The first thing you need to do to get started with Firebase [is sign up for a free account](https://www.firebase.com/login/). 
-A brand new Firebase app will automatically be created for you with its own unique database URL ending in firebaseio.com. 
-We'll use this database URL to store and sync data.
-
-
-**Go to a dashboard**
-
-**Upload [teletype.JSON]()**
-
-
-**Set security rules**
-
-Go to security tab and past this code:
-
-```
-
-```
-
-Then press save.
-
-
-
-
-**Install firebase cl**
-
-
-**Save & Retrieve Data**
-
-We can use any Firebase database URL as a REST endpoint by appending .json to the end of the URL, and sending standard HTTPS requests
-
 
 -----
 
@@ -364,6 +328,121 @@ _in progress_
 
 
 _in progress_
+
+-----
+
+### Firebase Setup
+
+
+We'll use any Firebase REST to Save data to our app. 
+
+
+**Create an account**
+
+The first thing you need to do to get started with Firebase [is sign up for a free account](https://www.firebase.com/login/). 
+A brand new Firebase app will automatically be created for you with its own unique database URL ending in firebaseio.com. 
+We'll use this database URL to store and sync data.
+
+![]()
+![]()
+![]()
+
+**Go to a dashboard**
+
+![]()
+
+**Upload [teletype.JSON]()**
+
+![]()
+![]()
+
+**Set security rules**
+
+![]()
+
+Go to security tab and past this code:
+
+```
+{"rules":
+	{".read":false,".write":false,
+		"teletype01":{".read":false,".write":false,
+			"$message":{".read":true,".write":"!data.exists()"
+			}
+		}
+	}
+}
+
+```
+
+Then press save.
+
+[Read detailed Firebase guied](https://www.firebase.com/docs/rest/guide/) 
+
+-----
+
+### Build simple web site to send images to Teletype
+
+
+**Setup the Firebase command line tools**
+
+>The Firebase command line tools require Node.js and npm, which can both be installed by following the instructions on [https://nodejs.org/](https://nodejs.org/). 
+Installing Node.js also installs npm.
+
+Once you have Node.js and npm installed, you can install the Firebase command line tools via npm:
+
+```
+$ npm update -g firebase-tools
+
+```
+
+**Copy contains of folder "" to anywhere on you HD**
+
+![]()
+
+**Open Terminal and switch to this folder**
+
+![]()
+
+**Initialize your app**
+
+Once you've chosen the Firebase app you'd like to deploy, cd into your project directory and run the command:
+
+```
+firebase init
+
+```
+
+Then you'll be prompted to select the Firebase app you'd like to deploy. You only ever need to run this init command once.
+
+![]()
+
+Running the firebase init command will create a firebase.json settings file in the root of your project directory. 
+You can learn more about this file in the Advanced Configuration section of the guide.
+
+**Deploy your website**
+
+To deploy your website simply run:
+
+```
+firebase deploy
+
+```
+![]()
+
+Your app will be deployed to the domain < YOUR-FIREBASE-APP > .firebasep p.com
+
+![]()
+
+
+Read more about firebase [command line](https://www.firebase.com/docs/hosting/command-line-tool.html) tools
+
+-----
+
+### Test Teletype
+
+
+Maecenas pretium id dui ullamcorper consectetur. Aliquam ut ligula magna. Sed convallis eleifend lacus eu tincidunt. Morbi quis dui feugiat, feugiat lectus hendrerit, interdum risus. Aenean mattis elit vel lectus vestibulum rhoncus. Donec congue nibh sed viverra dictum. Sed eget leo in augue dapibus rhoncus sed nec metus. Mauris commodo quis neque vitae vestibulum. Duis pellentesque ipsum eu accumsan condimentum. Suspendisse tempus molestie dignissim. Duis nec pulvinar risus.
+
 
 -----
 
